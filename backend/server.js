@@ -9,7 +9,7 @@ app.use(express.json());
 
 // Retry logic for MongoDB connection
 const connectWithRetry = () => {
-  mongoose.connect('mongodb://mongo:27017/dockerlearn', {
+ mongoose.connect(process.env.MONGO_URL, {
     serverSelectionTimeoutMS: 5000, // waits 5s before timing out
   })
     .then(() => console.log("✅ Connected to MongoDB"))
