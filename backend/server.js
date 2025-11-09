@@ -9,7 +9,7 @@ app.use(express.json());
 
 // Retry logic for MongoDB connection
 const connectWithRetry = () => {
- mongoose.connect(process.env.MONGO_URL, {
+  mongoose.connect(process.env.MONGO_URL, {
     serverSelectionTimeoutMS: 5000, // waits 5s before timing out
   })
     .then(() => console.log("✅ Connected to MongoDB"))
@@ -20,6 +20,11 @@ const connectWithRetry = () => {
 };
 
 connectWithRetry();
+
+// Root route
+app.get("/", (req, res) => {
+  res.send("✅ Backend is live and running on Render!");
+});
 
 app.get('/api/hello', (req, res) => {
   res.json({ message: "Hello from backend!" });
